@@ -19,7 +19,7 @@ if (env.NODE_ENV==='production' && !env.IS_ELECTRON) {
   defaultPrefix = 'pro'
 }
 
-console.log(process.env,defaultPrefix)
+console.log(`Running ENV:${defaultPrefix}`)
 
 export function changeAjaxBaseUrl(prefix,vue) {
   prefix = prefix?prefix:defaultPrefix
