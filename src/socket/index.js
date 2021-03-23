@@ -56,7 +56,7 @@ function init(vue) {
 
   ws.onmessage = (event) => {
     let data = JSON.parse(event.data)
-    console.log(`Socket get a [${data.type}] message:${data.data}`)
+    console.log(`Socket get [${data.type}] message`,data.data)
     switch (data.type) {
       case 'all':
         vue.$store.commit('flushChatLog', data.data)
