@@ -18,7 +18,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item prop="num" label="数字代号" :rules="[{required:true,message:'请输入角色数字代号',trigger:'blur'}]">
-        <el-input v-model="form.num" placeholder="请输入角色数字代号"></el-input>
+        <el-input v-model="form.num" placeholder="请输入角色数字代号" @change="changeCharNum"></el-input>
       </el-form-item>
       <el-form-item prop="jp_name" label="日文名称" :rules="[{required:true,message:'请输入角色日文名称',trigger:'blur'}]">
         <el-input v-model="form.jp_name" placeholder="请输入角色日文名称"></el-input>
@@ -136,7 +136,31 @@
         }
         return val
       },
-      'form.num'(val){
+      // 'form.num'(val){
+      //   if (this.isEdit&&val===this.value[2]&&this.form.star===this.value[1].replace('star','')) {
+      //     this.form.imgUrl = this.tempImgUrl
+      //     return val
+      //   }
+      //   if (this.uploadFile) return val
+      //   if (val === '') {
+      //     this.form.imgUrl = ''
+      //   } else {
+      //     this.form.imgUrl = 'https://redive.estertion.win/icon/unit/' + val + (this.form.star === '3' ? '3' : '1') + '1.webp'
+      //   }
+      //   return val
+      // },
+    },
+    computed:{
+      width_(){
+        if (this.width>900){
+          return '50%'
+        }else {
+          return '100%'
+        }
+      }
+    },
+    methods: {
+      changeCharNum(val){
         if (this.isEdit&&val===this.value[2]&&this.form.star===this.value[1].replace('star','')) {
           this.form.imgUrl = this.tempImgUrl
           return val
@@ -149,17 +173,6 @@
         }
         return val
       },
-    },
-    computed:{
-      width_(){
-        if (this.width>900){
-          return '50%'
-        }else {
-          return '100%'
-        }
-      }
-    },
-    methods: {
       dialogOpen() {
         if (this.value) {
           let value = this.value
