@@ -16,7 +16,7 @@
     <el-row class="search-tool-bar">
       <div style="position: absolute;left: 10px;top: 0">
         <el-button icon="el-icon-setting" size="small" @click="visible=true"></el-button>
-        <el-button size="small" type="primary" @click="searchDynamic(0)"
+        <el-button size="small" type="primary" @click="searchDynamic(0)" style="margin-right: 10px"
                    :loading="isSearching"
                    icon="el-icon-search">Search
         </el-button>
@@ -29,10 +29,10 @@
         <span class="uname-span">{{userInfo.uname||userInfo.name}}</span>
       </div>
       <span class="search-tool-btn" v-if="userInfo.uid||userInfo.mid">
-          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" style="margin-right: 6px"
+          <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" style="margin-right: 10px"
                        @change="changeCheckAll"></el-checkbox>
           <i :class="deleting?'el-icon-loading btn-deleting':'el-icon-delete btn-danger'" @click="deleteAll"></i>
-          <span class="search-expand-btn">
+          <span class="search-expand-btn" style="margin-left: 5px">
             <i class="el-icon-arrow-up" @click="retractAll(false)"></i>
             <i class="el-icon-arrow-down" @click="retractAll(true)"></i>
           </span>
@@ -125,7 +125,7 @@
         }
         api_live.getBiliDynamic(params).then(res => {
           if (res['code'] === 0 && res.data['code'] === 0) {
-            if (this.form.offsetId === res.data.data['next_offset']) {
+            if (this.form.offsetId === res.data.data['next_offset']||res.data.data['next_offset'] === 0) {
               this.hasMore = false
             } else {
               this.form.offsetId = res.data.data['next_offset']
@@ -359,7 +359,7 @@
 
   .search-tool-btn {
     position: absolute;
-    right: 30px;
+    right: 25px;
     top: 0;
     height: 32px;
     line-height: 32px;

@@ -8,7 +8,12 @@ export default new Vuex.Store({
         isLogin: false,
         isAdmin: false,
         calendar_setting: {},
-        chatLog: {private: {}, group: {}}
+        chatLog: {private: {}, group: {}},
+        botReady: {
+            ready: false,
+            bot: [],
+            api: {}
+        }
     },
     mutations: {
         updateIsLogin(state, value) {
@@ -47,6 +52,9 @@ export default new Vuex.Store({
                 state.chatLog[r[0]][r[1] + '_' + r[2]].rows = [...data.rows, ...state.chatLog[r[0]][r[1] + '_' + r[2]].rows]
                 state.chatLog[r[0]][r[1] + '_' + r[2]].noMore = data.rows.length < 20
             } else state.chatLog[r[0]][r[1] + '_' + r[2]] = {rows: [data], noMore: false, hasNew: false}
+        },
+        updateBotReady(state, data) {
+            state.botReady = data
         }
     }
 })

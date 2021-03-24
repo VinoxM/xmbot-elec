@@ -17,7 +17,7 @@
     <xm-info-box title="其他功能" retractable v-if="isLogin">
       <el-row>
         <el-button type="primary" icon="el-icon-chat-line-square" @click="$router.push('/chat-puppet')">聊天人偶</el-button>
-        <el-button type="primary" icon="el-icon-delete" :disabled="!isAdmin" @click="$router.push('/bili-dynamic')">Bili动态一键删除</el-button>
+        <el-button type="primary" icon="el-icon-delete" :disabled="!isAdmin" @click="$router.push('/bili-dynamic')">Bili动态管理</el-button>
       </el-row>
     </xm-info-box>
   </div>

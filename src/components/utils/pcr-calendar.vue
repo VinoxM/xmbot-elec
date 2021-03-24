@@ -7,7 +7,7 @@
     <el-calendar>
       <div slot="dateCell" slot-scope="{date,data}">
         <span class="calendar-date">{{new Date(date).getDate()}}</span>
-        <el-row class="calendar-active" v-for="(v,k) of getByDate(date)" :key="k" :title="v.name">{{v.name}}</el-row>
+        <el-row class="calendar-active" v-for="(v,k) of getByDate(date)" :key="k" :title="v">{{v}}</el-row>
       </div>
     </el-calendar>
   </div>
@@ -33,14 +33,18 @@
       getByDate(d) {
         if (!this.curCalendar) return []
         const date = new Date(d)
-        return this.curCalendar.filter(o => {
+        const result = []
+        this.curCalendar.map(o => {
           let s = new Date(o['start_time'])
           let e = new Date(o['end_time'])
           let start = s.getFullYear() * 10000 + (s.getMonth() + 1) * 100 + s.getDate()
           let end = e.getFullYear() * 10000 + (e.getMonth() + 1) * 100 + e.getDate()
           let now = date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate()
-          return now >= start && now <= end
+          if (now >= start && now <= end && result.indexOf(o.name) === -1) {
+            result.push(o.name)
+          }
         })
+        return result
       }
     },
     created() {

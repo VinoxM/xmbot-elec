@@ -8,7 +8,7 @@ import VueCookies from 'vue-cookies'
 import store from './store/index'
 import {createWs, socket} from './socket/index'
 import VueECharts from 'v-charts'
-import {getBotApi} from './api/base'
+import {getBotApi, getBotReady} from './api/base'
 
 Vue.component('xm-tags', () => import('./components/xmElement/xm-tags'))
 Vue.component('xm-info-box', () => import('./components/xmElement/xm-info-box'))

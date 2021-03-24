@@ -9,6 +9,7 @@ export const menuDict = [
     icon: 'el-icon-setting',
     path: '/base-setting',
     name: 'base-setting',
+    meta: {title: '基础设置'},
     component: () => import('../components/plugins/base/base-setting')
   },
   {
@@ -16,6 +17,7 @@ export const menuDict = [
     icon: 'el-icon-printer',
     path: '/repeat-setting',
     name: 'repeat-setting',
+    meta: {title: '复读设置'},
     component: () => import('../components/plugins/repeat/repeat-setting')
   },
   {
@@ -23,6 +25,7 @@ export const menuDict = [
     icon: 'el-icon-chat-round',
     path: '/chat-setting',
     name: 'chat-setting',
+    meta: {title: 'Chat设置'},
     component: () => import('../components/plugins/chat/chat-setting')
   },
   {
@@ -30,6 +33,7 @@ export const menuDict = [
     icon: 'el-icon-paperclip',
     path: '/rss-setting',
     name: 'rss-setting',
+    meta: {title: 'RSS设置'},
     component: () => import('../components/plugins/rss/rss-setting')
   },
   {
@@ -37,7 +41,7 @@ export const menuDict = [
     icon: 'el-icon-video-play',
     path: '/live-setting',
     name: 'live-setting',
-    meta: {auth: true, noAuthHidden: true},
+    meta: {auth: true, noAuthHidden: true, title: 'Live设置'},
     component: () => import('../components/plugins/live/live-setting')
   },
   {
@@ -49,7 +53,7 @@ export const menuDict = [
         icon: 'el-icon-s-custom',
         path: '/pcr/character-setting',
         name: 'pcr-character-setting',
-        meta: {auth: false},
+        meta: {auth: false, title:'角色设置'},
         component: () => import('../components/plugins/gacha/pcr-character-setting')
       },
       {
@@ -57,7 +61,7 @@ export const menuDict = [
         icon: 'el-icon-thumb',
         path: '/pcr/pool-setting',
         name: 'pcr-pool-setting',
-        meta: {auth: false},
+        meta: {auth: false, title: '卡池设置'},
         component: () => import('../components/plugins/gacha/pcr-pool-setting')
       },
       {
@@ -65,6 +69,7 @@ export const menuDict = [
         icon: 'el-icon-date',
         path: '/pcr/calendar-setting',
         name: 'calendar-setting',
+        meta: {title: '日历设置'},
         component: () => import('../components/plugins/calendar/pcr-calendar-setting')
       }
     ]
@@ -100,30 +105,28 @@ const routes = [
       component: () => import('../components/plugins/plugins-home'),
       children: handleMenu(menuDict)
     }, {
-      title: '帮助手册',
       icon: 'el-icon-notebook-2',
       path: '/plugins-dict',
       name: 'plugins-dict',
+      meta: {title: '插件命令'},
       component: () => import('../components/plugins/plugins-dict')
     }, {
-      title: 'Bili动态管理',
       icon: 'el-icon-chat-round',
       path: '/bili-dynamic',
       name: 'bili-dynamic',
-      meta: {auth: true, noAuthHidden: true},
+      meta: {auth: true, noAuthHidden: true, title: 'Bili动态管理'},
       component: () => import('../components/utils/bili-dynamic')
     }, {
-      title: '聊天人偶',
       icon: 'el-icon-chat-line-square',
       path: '/chat-puppet',
       name: 'chat-puppet',
-      meta: {auth: true, noAuthHidden: true},
+      meta: {auth: true, noAuthHidden: true, title: '聊天人偶'},
       component: () => import('../components/utils/socket-chat')
     }, {
-      title: 'PCR活动日历',
       icon: 'el-icon-date',
       path: '/calendar-pcr',
       name: 'calendar-pcr',
+      meta: {title: 'PCR活动日历'},
       component: () => import('../components/utils/pcr-calendar')
     },
     ]

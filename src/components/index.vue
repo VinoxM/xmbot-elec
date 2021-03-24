@@ -2,7 +2,8 @@
   <el-container>
     <el-header height="48">
       <xm-affix :offset="0" class="text-center">
-        <span class="xm-title" @click="toHome('/home')">xmBot</span>
+        <span class="xm-title xm-title-hover position-absolute" style="left: 15px" @click="toHome('/home')">xmBot</span>
+        <span class="xm-title">{{centerTitle}}</span>
         <div class="position-absolute xm-login-box">
           <el-dropdown style="vertical-align: top" v-if="isLogin">
                               <span class="xm-title-user">
@@ -32,7 +33,8 @@ export default {
   name: "index",
   data() {
     return {
-      user_id: ''
+      user_id: '',
+      centerTitle: ''
     }
   },
   computed: {
@@ -47,7 +49,14 @@ export default {
       }
     },
   },
+  beforeRouteUpdate(to, from, next){
+    this.updateTitle(to)
+    next()
+  },
   methods: {
+    updateTitle(to){
+      this.centerTitle = to.meta.title
+    },
     toHome(home) {
       if (this.$route.fullPath !== home) {
         this.$router.push(home)
@@ -77,6 +86,9 @@ export default {
     if (user_id) {
       this.user_id = user_id
     }
+  },
+  created() {
+    this.updateTitle(this.$route)
   }
 }
 </script>
@@ -92,10 +104,10 @@ export default {
   line-height: 24px;
   font-size: 18px;
   font-weight: bold;
-  cursor: pointer;
 }
 
-.xm-title:hover {
+.xm-title-hover:hover {
+  cursor: pointer;
   color: dodgerblue;
   text-decoration: underline;
 }

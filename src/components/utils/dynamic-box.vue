@@ -5,20 +5,22 @@
       <span class="text-time-top">{{fullTime?value.item.fullTime:value.item.time}}</span>
       <span :class="fullTime?'text-ellipsis padding-long':'text-ellipsis padding-short'">{{value.item.content}}</span>
       <span style="position: absolute;right:0;top:0">
-        <el-checkbox :value="value.selected" @change="changeSelected" style="margin-right: 6px"></el-checkbox>
+        <i class="el-icon-paperclip btn-icon" v-if="value.hasOwnProperty('short_link')" @click.stop="jumpTo(value)" style="margin-right: 10px"></i>
+        <el-checkbox :value="value.selected" @change="changeSelected" style="margin-right: 10px"></el-checkbox>
         <i :class="value.deleting?'el-icon-loading btn-deleting':'el-icon-delete btn-icon btn-danger'"
            @click.stop="delDynamic"></i>
-        <i class="el-icon-arrow-down btn-icon" @click.stop="value.retract=true" style="margin-left: 6px"></i>
+        <i class="el-icon-arrow-down btn-icon" @click.stop="value.retract=true" style="margin-left: 10px"></i>
       </span>
     </el-row>
     <el-row v-show="value.retract">
       <el-row class="line-height-32">
         <span class="text-time">{{fullTime?value.item.fullTime:value.item.time}}</span>
         <span style="float: right">
-          <el-checkbox :value="value.selected" @change="changeSelected" style="margin-right: 6px"></el-checkbox>
+          <i class="el-icon-paperclip btn-icon" v-if="value.hasOwnProperty('short_link')" @click.stop="jumpTo(value)" style="margin-right: 10px"></i>
+          <el-checkbox :value="value.selected" @change="changeSelected" style="margin-right: 10px"></el-checkbox>
           <i :class="value.deleting?'el-icon-loading btn-deleting':'el-icon-delete btn-icon btn-danger'"
              @click.stop="delDynamic"></i>
-          <i class="el-icon-arrow-up btn-icon" @click.stop="value.retract=false" style="margin-left: 6px"></i>
+          <i class="el-icon-arrow-up btn-icon" @click.stop="value.retract=false" style="margin-left: 10px"></i>
         </span>
       </el-row>
       <p class="text-ellipsis" style="padding: 0 5px;" :title="value.item.content">{{value.item.content}}</p>
@@ -55,6 +57,9 @@
       changeSelected(val){
         this.value.selected = !val
         this.$emit('selected')
+      },
+      jumpTo(val){
+        window.open(val['short_link'])
       }
     },
     created() {
