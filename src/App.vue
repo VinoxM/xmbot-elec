@@ -1,28 +1,21 @@
 <template>
   <div id="app" class="text-left">
     <router-view/>
-<!--    <url-conf></url-conf>-->
   </div>
 </template>
 
 <script>
-  // import urlConf from './components/others/url-prefix-conf'
 
   export default {
     name: 'App',
     components: {
-      // 'url-conf': urlConf
     },
     computed: {
-      isAdmin() {
-        return this.$store.state.isAdmin
-      }
     },
     data() {
       return {}
     },
     created() {
-      // let user_id = this.$cookies.get('user_id')
     }
   }
 </script>
@@ -35,6 +28,24 @@
     /*text-align: center;*/
     color: #2c3e50;
     /*margin-top: 60px;*/
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #F5F5F5;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #999;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background-color: #555;
   }
 
   label.el-form-item__label:after {
