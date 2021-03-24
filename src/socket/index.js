@@ -28,7 +28,7 @@ export function createWs(vue) {
     if (ws) ws.close()
     socket.isConnecting = true
     let url = ''
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV !== 'development') {
         let curPrefix = vue.$cookies.get('curUrlPrefix')
         url = urlConf[curPrefix ? curPrefix : defaultPrefix]
     } else {
