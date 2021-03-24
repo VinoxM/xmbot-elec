@@ -4,8 +4,8 @@ let recon_count = 0;
 
 const defaultPrefix = 'dev'
 
-const devServer = process.env["VUE_APP_DEV_SERVER "]||'127.0.0.1'
-const proServer = process.env["VUE_APP_PRO_SERVER "]||'127.0.0.1'
+const devServer = process.env["VUE_APP_DEV_SERVER"]||'127.0.0.1'
+const proServer = process.env["VUE_APP_PRO_SERVER"]||'127.0.0.1'
 const socketPort = process.env["VUE_APP_SOCKET_PORT"]||9220
 
 const urlConf = {
@@ -27,8 +27,13 @@ export function createWs(vue) {
     console.log(`${recon_count === 0 ? 'ws connecting' : `ws reconnection [${recon_count} times]`}`)
     if (ws) ws.close()
     socket.isConnecting = true
-    let curPrefix = vue.$cookies.get('curUrlPrefix')
-    const url = urlConf[curPrefix ? curPrefix : defaultPrefix]
+    let url = ''
+    if (process.env.NODE_ENV === 'development') {
+        let curPrefix = vue.$cookies.get('curUrlPrefix')
+        url = urlConf[curPrefix ? curPrefix : defaultPrefix]
+    } else {
+        url = urlConf[defaultPrefix]
+    }
     ws = new WebSocket(url)
     init(vue)
 }

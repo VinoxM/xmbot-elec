@@ -1,7 +1,7 @@
 export const ajax = require('axios').default
 
-const devServer = process.env["VUE_APP_DEV_SERVER "]||'127.0.0.1'
-const proServer = process.env["VUE_APP_PRO_SERVER "]||'127.0.0.1'
+const devServer = process.env["VUE_APP_DEV_SERVER"]||'127.0.0.1'
+const proServer = process.env["VUE_APP_PRO_SERVER"]||'127.0.0.1'
 const ajaxPort = process.env["VUE_APP_AJAX_PORT"]||9221
 
 export const urlConf = {
