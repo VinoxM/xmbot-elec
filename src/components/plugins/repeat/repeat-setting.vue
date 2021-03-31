@@ -1,6 +1,7 @@
 <template>
   <el-row v-loading="loading" style="padding: 5px 0 0 0">
     <el-row style="margin-bottom: 15px">
+      <el-button size="small" type="success" :loading="loading" @click="loadData">刷新</el-button>
       <el-button size="small" type="primary" :loading="saveLoading" @click="save" v-if="isAdmin">保存本页</el-button>
     </el-row>
     <el-form label-width="90px">
@@ -68,16 +69,19 @@
           })
           this.saveLoading = false
         }).catch(()=>{this.saveLoading = false})
+      },
+      loadData(){
+        this.loading = true
+        api_repeat.getRepeatSetting().then(res => {
+          this.loading = false
+          if (res['code'] !== 0) return
+          this.setting = res.data
+        }).catch(() => {
+        })
       }
     },
     created() {
-      this.loading = true
-      api_repeat.getRepeatSetting().then(res => {
-        this.loading = false
-        if (res['code'] !== 0) return
-        this.setting = res.data
-      }).catch(() => {
-      })
+      this.loadData()
     }
   }
 </script>

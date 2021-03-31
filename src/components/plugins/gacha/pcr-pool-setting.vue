@@ -409,8 +409,11 @@ export default {
     },
     getSrc(v, n) {
       let curUrlPrefix = this.$cookies.get('curUrlPrefix')
+      console.log()
       let urlPrefix = curUrlPrefix ? this.$urlConf[curUrlPrefix + '_url'] : this.$urlConf['base_url']
       // let urlPrefix = this.$urlConf['base_url']
+      const url = urlPrefix + 'xmbot/resource/icon/unit/' + v.id + (n === 'star3' ? '3' : '1') + '1.jpg'
+      console.log(url)
       return urlPrefix + 'xmbot/resource/icon/unit/' + v.id + (n === 'star3' ? '3' : '1') + '1.jpg'
     },
     toggleSel: function (n, type, n1, n2) {

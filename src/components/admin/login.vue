@@ -140,7 +140,9 @@ export default {
           message: res['msg'],
           duration: 1000,
           onClose: () => {
-            this.$router.push('/index').then(() => window.location.reload())
+            this.$router.push('/index').then(() => {
+              window.location.reload()
+            })
           }
         })
       }

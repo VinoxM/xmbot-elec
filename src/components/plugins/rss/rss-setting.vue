@@ -1,10 +1,11 @@
 <template>
-  <el-row v-loading="loading" class="position-relative">
-    <div class="tool-btn">
+  <el-row v-loading="loading" class="position-relative" style="padding-top: 5px">
+    <div style="margin-bottom: 15px">
+      <el-button size="small" type="success" :loading="loading" @click="loadData">刷新</el-button>
       <el-button v-if="isAdmin" size="small" type="primary" @click="rssSave">保存本页</el-button>
     </div>
     <el-form v-if="!loading" :model="setting" ref="form" label-width="100px">
-      <el-form-item label="初始化时间">
+      <el-form-item label="初始化时间" class="display-inline-block">
         <el-input-number :controls="false" size="small" v-model="setting['initial_time']['time']" style="width: 100px"
                          :disabled="!isAdmin"></el-input-number>
         <el-select v-model="setting['initial_time']['units']" style="width: 60px" size="small" :disabled="!isAdmin">
@@ -13,7 +14,7 @@
           <el-option label="秒" value="seconds"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="循环时间">
+      <el-form-item label="循环时间" class="display-inline-block">
         <el-input-number :controls="false" size="small" v-model="setting['interval']['time']" style="width: 100px"
                          :disabled="!isAdmin"></el-input-number>
         <el-select v-model="setting['interval']['units']" style="width: 60px" size="small" :disabled="!isAdmin">
@@ -44,7 +45,7 @@
               <el-link type="danger" @click="rssDel(key)"><i class="el-icon-delete-solid"></i></el-link>
             </el-tooltip>
           </div>
-          <el-form label-width="80px" class="rss-form-box">
+          <el-form label-width="120px" class="rss-form-box">
             <el-form-item label="启用" class="display-inline-block" style="width: 200px">
               <el-switch v-model="item.on" active-color="#13ce66" :disabled="!isAdmin"></el-switch>
             </el-form-item>
@@ -61,8 +62,11 @@
             <el-form-item label="键名">
               <el-input v-model="item.name" readonly></el-input>
             </el-form-item>
-            <el-form-item label="关键词">
+            <el-form-item label="命令关键词">
               <xm-tags :value.sync="item['name_filter']" :disabled="!isAdmin"></xm-tags>
+            </el-form-item>
+            <el-form-item label="消息关键词过滤">
+              <xm-tags :value.sync="item['word_filter']" :disabled="!isAdmin"></xm-tags>
             </el-form-item>
             <el-form-item label="提取链接">
               <el-input v-model="item['link_replace']" :readonly="!isAdmin"></el-input>
@@ -72,14 +76,14 @@
                 <xm-info-box title="群聊">
                   <el-checkbox :disabled="!isAdmin"
                                :checked="val.group==='all'||!val.group instanceof Array"
-                               @change="val.group=$event?'all':[]" label="全局推送"></el-checkbox>
+                               @change="val.group=$event?'all':[]" label="全局推送" style="margin-right: 5px"></el-checkbox>
                   <xm-tags v-if="val.group!=='all'" :value.sync="val.group"
                            :disabled="!isAdmin"></xm-tags>
                 </xm-info-box>
                 <xm-info-box title="私聊">
                   <el-checkbox :disabled="!isAdmin"
                                :checked="val.private==='all'||!val.private instanceof Array"
-                               @change="val.private=$event?'all':[]" label="全局推送"></el-checkbox>
+                               @change="val.private=$event?'all':[]" label="全局推送" style="margin-right: 5px"></el-checkbox>
                   <xm-tags v-if="val.private!=='all'" :value.sync="val.private"
                            :disabled="!isAdmin"></xm-tags>
                 </xm-info-box>
@@ -125,8 +129,11 @@
         <el-form-item label="键名" prop="name">
           <el-input v-model="addForm.name" placeholder="输入键名,勿与已有rss重复"></el-input>
         </el-form-item>
-        <el-form-item label="关键词">
+        <el-form-item label="命令关键词">
           <xm-tags :value.sync="addForm['name_filter']"></xm-tags>
+        </el-form-item>
+        <el-form-item label="消息关键词过滤">
+          <xm-tags :value.sync="addForm['word_filter']"></xm-tags>
         </el-form-item>
         <el-form-item label="提取链接" prop="link_replace">
           <el-input v-model="addForm['link_replace']" placeholder="输入提取链接"></el-input>
@@ -183,6 +190,7 @@
           source: '',
           name: '',
           name_filter: [],
+          word_filter: [],
           link_replace: '',
           push_list:pushList,
           last_id: ''
@@ -248,6 +256,7 @@
           source: '',
           name: '',
           name_filter: [],
+          word_filter: [],
           link_replace: '',
           push_list: pushList,
           last_id: ''
@@ -257,15 +266,18 @@
         api_rss.saveRssSetting(this.setting).then(res=>{
           this.$message[res['code']===0?'success':'error'](res['msg'])
         })
+      },
+      loadData(){
+        this.loading = true
+        api_rss.getRssSetting().then(res => {
+          this.setting = res.data
+          this.loading = false
+        }).catch(e => {
+        })
       }
     },
     created() {
-      this.loading = true
-      api_rss.getRssSetting().then(res => {
-        this.setting = res.data
-        this.loading = false
-      }).catch(e => {
-      })
+      this.loadData()
     }
   }
 </script>

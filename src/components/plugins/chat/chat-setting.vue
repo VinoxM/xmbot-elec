@@ -1,6 +1,7 @@
 <template>
   <el-row v-loading="loading" style="padding-top: 5px">
     <el-row v-if="isAdmin" style="margin-bottom: 15px">
+      <el-button size="small" type="success" :loading="loading" @click="loadData">刷新</el-button>
       <el-button type="primary" size="small" @click="save">保存本页</el-button>
     </el-row>
     <xm-info-box title="Q&A" retractable style="padding-top: 20px">
@@ -118,20 +119,23 @@
         }).catch(err => {
           this.saveLoading = false
         })
+      },
+      loadData(){
+        this.loading = true
+        api_chat.getChatSetting().then(res => {
+          this.loading = false
+          if (res['code'] !== 0) {
+            this.$message.error(res['msg'])
+            return
+          }
+          this.setting = res.data
+        }).catch(() => {
+          this.loading = false
+        })
       }
     },
     created() {
-      this.loading = true
-      api_chat.getChatSetting().then(res => {
-        this.loading = false
-        if (res['code'] !== 0) {
-          this.$message.error(res['msg'])
-          return
-        }
-        this.setting = res.data
-      }).catch(() => {
-        this.loading = false
-      })
+      this.loadData()
     }
   }
 </script>

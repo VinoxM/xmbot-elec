@@ -15,6 +15,9 @@
       <el-tooltip content="添加角色" placement="top" style="margin-left: 10px" v-if="isAdmin">
         <el-button class="el-icon-plus" type="success" size="small" circle @click="charAdd"></el-button>
       </el-tooltip>
+      <el-tooltip content="刷新" placement="top" style="margin-left: 10px" >
+        <el-button class="el-icon-refresh" type="success" size="small" circle :loading="loading" @click="getNickNames"></el-button>
+      </el-tooltip>
     </el-row>
     <el-row v-loading="loading" class="char-boxes"
             :style="{height:charBoxHeight}">

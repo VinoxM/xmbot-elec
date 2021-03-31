@@ -1,6 +1,7 @@
 <template>
   <el-row v-loading="loading" style="padding-top: 5px">
     <el-row style="margin-bottom: 15px">
+      <el-button size="small" type="success" :loading="loading" @click="getSettings">刷新</el-button>
       <el-button v-if="isAdmin" type="primary" size="small" :loading="saveLoading" @click="save">保存本页</el-button>
     </el-row>
     <el-form label-width="90px" ref="form" :model="setting">

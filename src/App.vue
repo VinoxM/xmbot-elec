@@ -6,114 +6,132 @@
 
 <script>
 
-  export default {
-    name: 'App',
-    components: {
-    },
-    computed: {
-    },
-    data() {
-      return {}
-    },
-    created() {
+export default {
+  name: 'App',
+  components: {},
+  computed: {},
+  data() {
+    return {}
+  },
+  methods: {
+    saveAllCookies() {
+      if (process.env.IS_ELECTRON
+          && process.env.NODE_ENV === 'production'
+      ) {
+        this.$cookies.saveAll()
+      }
     }
+  },
+  created() {
+    window.addEventListener('beforeunload', () => this.saveAllCookies())
+  },
+  beforeDestroy() {
+    this.saveAllCookies()
+  },
+  destroyed() {
+    window.removeEventListener('beforeunload', () => this.saveAllCookies())
   }
+}
 </script>
 
 <style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /*text-align: center;*/
-    color: #2c3e50;
-    /*margin-top: 60px;*/
-  }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*text-align: center;*/
+  color: #2c3e50;
+  /*margin-top: 60px;*/
+}
 
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: #F5F5F5;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: #F5F5F5;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #999;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #777;
-  }
-  ::-webkit-scrollbar-thumb:active {
-    background-color: #555;
-  }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: #F5F5F5;
+}
 
-  label.el-form-item__label:after {
-    content: ': ';
-  }
+::-webkit-scrollbar-track {
+  background-color: #F5F5F5;
+}
 
-  .text-center {
-    text-align: center !important;
-  }
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+}
 
-  .text-left {
-    text-align: left !important;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
 
-  .text-right {
-    text-align: right !important;
-  }
+::-webkit-scrollbar-thumb:active {
+  background-color: #555;
+}
 
-  .display-inline-block {
-    display: inline-block;
-  }
+label.el-form-item__label:after {
+  content: ': ';
+}
 
-  .display-block {
-    display: block;
-  }
+.text-center {
+  text-align: center !important;
+}
 
-  .el-tooltip__popper.is-light {
-    border: 1px solid #b5b5b5 !important;
-  }
+.text-left {
+  text-align: left !important;
+}
 
-  .float-right {
-    float: right;
-  }
+.text-right {
+  text-align: right !important;
+}
 
-  body {
-    margin: 0;
-  }
+.display-inline-block {
+  display: inline-block;
+}
 
-  .position-relative {
-    position: relative;
-  }
+.display-block {
+  display: block;
+}
 
-  .position-absolute {
-    position: absolute;
-  }
+.el-tooltip__popper.is-light {
+  border: 1px solid #b5b5b5 !important;
+}
 
-  .cur-pointer{
-    cursor: pointer;
-  }
+.float-right {
+  float: right;
+}
 
-  .cur-default{
-    cursor: default;
-  }
+body {
+  margin: 0;
+}
 
-  .cur-not-allowed{
-    cursor: not-allowed;
-  }
+.position-relative {
+  position: relative;
+}
 
-  .css-hide{
-    display: none !important;
-  }
+.position-absolute {
+  position: absolute;
+}
 
-  .xm-link {
-    cursor: pointer;
-  }
+.cur-pointer {
+  cursor: pointer;
+}
 
-  .xm-link:hover {
-    color: #66b1ff;
-    text-decoration: underline;
-  }
+.cur-default {
+  cursor: default;
+}
+
+.cur-not-allowed {
+  cursor: not-allowed;
+}
+
+.css-hide {
+  display: none !important;
+}
+
+.xm-link {
+  cursor: pointer;
+}
+
+.xm-link:hover {
+  color: #66b1ff;
+  text-decoration: underline;
+}
 </style>

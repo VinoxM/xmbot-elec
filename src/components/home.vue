@@ -1,5 +1,6 @@
 <template>
   <div class="text-center home-box">
+<!--    <iframe src="https://discord.com/widget?id=822804024708956161&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>-->
     <el-row>
       <span v-if="isLogin">来自{{userId.split('_')[0]}}的用户:{{userId.split('_')[1]}},欢迎使用!</span>
       <span v-else>未登录</span>

@@ -1,6 +1,7 @@
 <template>
   <el-row style="padding: 5px 0 0 0" v-loading="loading">
     <el-row v-if="isAdmin" style="margin-bottom: 15px">
+      <el-button size="small" type="success" :loading="loading" @click="loadData">刷新</el-button>
       <el-button size="small" type="primary" @click="saveSetting" :loading="saveLoading">保存本页</el-button>
     </el-row>
     <el-form v-if="setting" label-width="120px" class="ws-form">
@@ -171,17 +172,21 @@
         }).catch(()=>{
           this.saveLoading = false
         })
+      },
+      loadData(){
+        this.loading = true
+        api_base.getBaseSetting().then(res => {
+          if (res['code'] === 0) {
+            this.loading = false
+            this.setting = res.data
+          } else {
+            this.$message.error(`加载失败:${res['msg']}`)
+          }
+        }).catch(()=>{})
       }
     },
     created() {
-      api_base.getBaseSetting().then(res => {
-        if (res['code'] === 0) {
-          this.loading = false
-          this.setting = res.data
-        } else {
-          this.$message.error(`加载失败:${res['msg']}`)
-        }
-      }).catch(()=>{})
+      this.loadData()
     }
   }
 </script>

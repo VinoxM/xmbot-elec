@@ -4,11 +4,12 @@ import {checkAuth, checkIsAdmin, router} from './router'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import {addAjaxInterceptors, ajax, changeAjaxBaseUrl, urlConf} from './api'
-import VueCookies from 'vue-cookies'
 import store from './store/index'
 import {createWs, socket} from './socket/index'
 import VueECharts from 'v-charts'
-import {getBotApi, getBotReady} from './api/base'
+import {getBotApi} from './api/base'
+import VueCookies from 'vue-cookies'
+import {Cookies} from './cookies/index'
 
 Vue.component('xm-tags', () => import('./components/xmElement/xm-tags'))
 Vue.component('xm-info-box', () => import('./components/xmElement/xm-info-box'))
@@ -17,8 +18,15 @@ Vue.component('xm-affix', () => import('./components/xmElement/xm-affix'))
 
 Vue.config.productionTip = false
 Vue.use(ElementUi)
-Vue.use(VueCookies)
 Vue.use(VueECharts)
+
+// Vue.prototype.$cookies = Cookies
+
+if (process.env.IS_ELECTRON && process.env.NODE_ENV === 'production') {
+    Vue.prototype.$cookies = Cookies
+} else {
+    Vue.use(VueCookies)
+}
 
 Vue.prototype.$ajax = ajax
 Vue.prototype.$urlConf = urlConf
