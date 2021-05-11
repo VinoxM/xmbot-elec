@@ -55,7 +55,7 @@
 
 <script>
   import * as api_live from '../../api/live'
-  import biliDynamic from './dynamic-box'
+  import biliDynamic from './templ-dynamic-box'
 
   export default {
     name: "bili-dynamic",

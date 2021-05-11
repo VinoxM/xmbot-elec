@@ -128,6 +128,12 @@ const routes = [
       name: 'calendar-pcr',
       meta: {title: 'PCR活动日历'},
       component: () => import('../components/utils/pcr-calendar')
+    },{
+      icon: 'el-icon-thumb',
+      path: '/pcr-online-gacha',
+      name: 'pcr-online-gacha',
+      meta: {title: 'PCR在线抽卡'},
+      component: () => import('../components/utils/pcr-online-gacha')
     },
     ]
   },

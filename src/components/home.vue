@@ -17,6 +17,9 @@
     </xm-info-box>
     <xm-info-box title="其他功能" retractable v-if="isLogin">
       <el-row>
+        <el-button type="primary" icon="el-icon-thumb" @click="$router.push('/pcr-online-gacha')">PCR在线抽卡</el-button>
+      </el-row>
+      <el-row>
         <el-button type="primary" icon="el-icon-chat-line-square" @click="$router.push('/chat-puppet')">聊天人偶</el-button>
         <el-button type="primary" icon="el-icon-delete" :disabled="!isAdmin" @click="$router.push('/bili-dynamic')">Bili动态管理</el-button>
       </el-row>

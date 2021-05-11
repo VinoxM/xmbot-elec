@@ -152,7 +152,7 @@ const charCard = {
     getUrl(star, num) {
       let curUrlPrefix = this.$cookies.get('curUrlPrefix')
       let urlPrefix = curUrlPrefix ? this.$urlConf[curUrlPrefix + '_url'] : this.$urlConf['base_url']
-      return urlPrefix + 'xmbot/resource/icon/unit/' + num + (star === 'star3' ? '3' : '1') + '1.jpg'
+      return urlPrefix + 'xmbot/resource/icon/unit/' + num + (star === 'star3' ? '3' : '1') + '1.png'
     },
     getStar() {
       let curUrlPrefix = this.$cookies.get('curUrlPrefix')
@@ -165,7 +165,7 @@ const charCard = {
   }
 }
 import * as api_pcr from '../../../api/gacha-pcr'
-import charEdit from './pcr-character-edit'
+import charEdit from './templ-pcr-character-edit'
 
 export default {
   name: "pcr-characters",

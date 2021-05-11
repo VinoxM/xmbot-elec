@@ -9,7 +9,7 @@ import {createWs, socket} from './socket/index'
 import VueECharts from 'v-charts'
 import {getBotApi} from './api/base'
 import VueCookies from 'vue-cookies'
-import {Cookies} from './cookies/index'
+import {Cookies,initCookies} from './cookies/index'
 
 Vue.component('xm-tags', () => import('./components/xmElement/xm-tags'))
 Vue.component('xm-info-box', () => import('./components/xmElement/xm-info-box'))
@@ -23,6 +23,7 @@ Vue.use(VueECharts)
 // Vue.prototype.$cookies = Cookies
 
 if (process.env.IS_ELECTRON && process.env.NODE_ENV === 'production') {
+    initCookies()
     Vue.prototype.$cookies = Cookies
 } else {
     Vue.use(VueCookies)

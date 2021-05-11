@@ -412,9 +412,9 @@ export default {
       console.log()
       let urlPrefix = curUrlPrefix ? this.$urlConf[curUrlPrefix + '_url'] : this.$urlConf['base_url']
       // let urlPrefix = this.$urlConf['base_url']
-      const url = urlPrefix + 'xmbot/resource/icon/unit/' + v.id + (n === 'star3' ? '3' : '1') + '1.jpg'
+      const url = urlPrefix + 'xmbot/resource/icon/unit/' + v.id + (n === 'star3' ? '3' : '1') + '1.png'
       console.log(url)
-      return urlPrefix + 'xmbot/resource/icon/unit/' + v.id + (n === 'star3' ? '3' : '1') + '1.jpg'
+      return urlPrefix + 'xmbot/resource/icon/unit/' + v.id + (n === 'star3' ? '3' : '1') + '1.png'
     },
     toggleSel: function (n, type, n1, n2) {
       if (!this.isAdmin) return

@@ -186,7 +186,7 @@
           }
           let curUrlPrefix = this.$cookies.get('curUrlPrefix')
           let urlPrefix = curUrlPrefix ? this.$urlConf[curUrlPrefix + '_url'] : this.$urlConf['base_url']
-          this.tempImgUrl = urlPrefix + 'xmbot/resource/icon/unit/' + value[2] + (value[1] === 'star3' ? '3' : '1') + '1.jpg'
+          this.tempImgUrl = urlPrefix + 'xmbot/resource/icon/unit/' + value[2] + (value[1] === 'star3' ? '3' : '1') + '1.png'
           this.form.imgUrl = this.tempImgUrl
           this.isEdit = true
         }

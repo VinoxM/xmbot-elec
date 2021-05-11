@@ -11,3 +11,6 @@ export const savePcrPoolsSetting = (params) => {return ajax({url:'/setting/gacha
 export const savePcrNickNames = (params) => {return ajax({url:'/setting/gacha/pcr-nickNames.save',method:'post',data:params,processData:false,contentType:false})}
 
 export const deletePcrCharacter = (params) => {return ajax({url:'/setting/gacha/pcr/delCharacter.do',method:'post',data:params})}
+
+
+export const onlinePcrGacha = (params) => {return ajax({url: '/gacha/pcr/online.do', method:'post', data:params})}
